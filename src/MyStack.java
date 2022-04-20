@@ -1,34 +1,46 @@
-import java.util.Stack;
-
 public class MyStack<E> extends MyClass<E>{
 
-    private Stack<E> stack;
+    private static int top, capacity;
 
     public MyStack(E[] array) {
         super(array);
+        top = -1;
     }
 
     @Override
-    void initialize() {
-        this.stack = new Stack<>();
-        for (E item: array) {
-            stack.push(item);
-        }
+    void initialize(int numberOfElements) {
+        capacity = numberOfElements;
+        array = new E[capacity];
     }
 
     @Override
     void add(E item) {
-        stack.push(item);
+        if (top + 1 == capacity){
+            System.out.println("Stack is full");
+        }else {
+            top++;
+            array[top] = item;
+        }
     }
 
     @Override
     void remove() {
-        stack.pop();
+        if (top == -1){
+            System.out.println("Stack is empty");
+        }else {
+            array[top] = null;
+            top--;
+        }
     }
 
     @Override
     void getElement() {
-        System.out.println(stack.peek());
+        if (top == -1){
+            System.out.println("Stack is empty");
+        }
+        else {
+            System.out.println(array[top]);
+        }
     }
 
 

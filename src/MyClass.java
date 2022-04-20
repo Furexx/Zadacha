@@ -7,7 +7,8 @@ abstract class MyClass<E> {
         this.array = array;
     }
 
-    abstract void initialize();
+
+    abstract void initialize(int numOfElements);
 
     abstract void add(E item);
 

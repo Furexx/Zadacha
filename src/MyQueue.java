@@ -1,34 +1,54 @@
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Queue;
-
 public class MyQueue<E> extends MyClass<E>{
 
-    private Queue<E> queue;
+    private static int front, rear, capacity;
 
     public MyQueue(E[] array) {
         super(array);
+        front = 0;
+        rear = 0;
     }
 
 
     @Override
-    void initialize() {
-        this.queue = new ArrayDeque<>();
-        queue.addAll(Arrays.asList(array));
+    void initialize(int numOfElements) {
+        capacity = numOfElements;
+        array = new E[capacity];
     }
 
     @Override
     void add(E item) {
-        queue.add(item);
+      if (capacity == rear) {
+          System.out.println("Queue is full");
+      }
+      else {
+          array[rear] = item;
+          rear++;
+      }
+
     }
 
     @Override
     void remove() {
-        queue.poll();
+        if (front == rear) {
+            System.out.println("Queue is empty");
+        }
+        else {
+            for (int i = 0; i < rear - 1; i++) {
+                array[i] = array[i +1];
+            }
+            if (rear < capacity){
+                array[rear] = null;
+            }
+            rear--;
+        }
     }
 
     @Override
     void getElement() {
-        System.out.println(queue.peek());
+        if (front == rear){
+            System.out.println("Queue is empty");
+        }
+        System.out.println(array[front]);
+
     }
 }
